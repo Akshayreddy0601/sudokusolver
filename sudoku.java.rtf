@@ -1,0 +1,270 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;\f1\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs32 \cf0 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 import\'a0java.util.Scanner;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 class\'a0sudoku
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \{
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 public\'a0static\'a0boolean\'a0check( int[][] board, int\'a0row, int\'a0col, int\'a0num )
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \{
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 for(int\'a0d = 0; d < board.length; d++)
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 if(board[row][d] == num)
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 return\'a0false;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 for(int\'a0r=0; r<board.length; r++)
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 if(board[r][col] == num)
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 return\'a0false;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 int\'a0sqrt = (int)Math.sqrt(board.length);
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 int\'a0boxRowStart = row - row % sqrt;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 int\'a0boxColStart = col - col % sqrt;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 for(int\'a0r = boxRowStart; r < boxRowStart + sqrt; r++)
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 for(int\'a0d = boxColStart; d < boxColStart + sqrt; d++)
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 if(board[r][d] == num)
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 return\'a0false;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 return\'a0true;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \}
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 public\'a0static\'a0boolean\'a0solve(int[][] board,int\'a0n)
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \{
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 int\'a0row = -1;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 int\'a0col = -1;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 boolean\'a0isEmpty = true;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 for(int\'a0i =0; \'a0i < n; i++)
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \{
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 for(int\'a0j = 0; j < n; j++)
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \{
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 if(board[i][j] == 0)
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \{
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 row = i;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 col = j;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 isEmpty = false;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 break;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \}
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \}
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 if( !isEmpty )
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 break;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \}
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 if( isEmpty )
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \{
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 return\'a0true;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \}
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 for(int\'a0num = 1; num <= n; num++)
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \{
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 if(check(board, row, col, num))
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \{
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 board[row][col] = num;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 if(solve(board, n))
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 return\'a0true;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 else
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 board[row][col] = 0;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \}
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \}
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 return\'a0false;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \}
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 public\'a0static\'a0void\'a0print(int[][] board,int\'a0N)
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \{
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 System.out.println("The SUDOKU puzzle is solved!!!");
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 for(int\'a0r = 0; r < N; r++)
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \{
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 for(int\'a0d = 0; d < N; d++)
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \{
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 System.out.print(board[r][d]);
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 System.out.print(" ");
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \}
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 System.out.print("\\n");
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \}
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \}
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 public\'a0static\'a0void\'a0main(String args[])
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \{
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 int[][] board = new\'a0int[9][9];
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 Scanner sc = new\'a0Scanner(System.in);
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 System.out.println("Enter a 9X9 unsolved SUDOKU puzzle:");
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 System.out.println("(Enter 0(zero) for missing numbers)");
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 for(int\'a0i = 0; i < 9; i++)
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 for(int\'a0j = 0; j < 9; j++)
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 board[i][j] = sc.nextInt();
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 sc.close();
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 int\'a0N =board.length;
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 if(solve(board,N))
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 print(board,N);
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 else\'a0
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 System.out.println("This SUDOKU puzzle cannot be solved");
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \}
+\f1\fs29\fsmilli14667 \
+
+\f0\fs32 \}
+\f1\fs29\fsmilli14667 \
+}
